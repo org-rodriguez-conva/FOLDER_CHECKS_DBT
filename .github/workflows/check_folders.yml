@@ -1,5 +1,5 @@
-name: Check Folders and Files
 
+name: Check Folders and Files
 on:
   pull_request_target:
     types: [opened, reopened]
