@@ -1,0 +1,59 @@
+name: Check Folders and Files
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+jobs:
+  check-folders-and-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check for required folders and files
+      run: |
+        # Check if folder macros exists
+        if [ ! -d "macros" ]; then
+          echo "Folder macros is missing."
+          exit 1  # Fail the workflow
+        fi
+        
+        # Check if folder models exists
+        if [ -d "models" ]; then
+          # Check if folders Datamart, Integration, Staging and Raw exist inside folder models
+          if [ -d "models/Datamart" ] && [ -d "models/Integration" ] && [ -d "models/Staging" ] && [ -d "models/Raw" ] && [ -d "models/source.yml" ]; then
+            echo "Folders Datamart, Integration, Staging and Raw are present inside folder models."
+          else
+            echo "One or more of the folders Datamart, Integration, Staging and Raw are missing inside folder models."
+            exit 1  # Fail the workflow
+          fi
+        else
+          echo "Folder models is missing."
+          exit 1  # Fail the workflow
+        fi
+        
+        # Check if folder snapshots exists
+        if [ ! -d "snapshots" ]; then
+          echo "Folder snapshots is missing."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if folder Tests exists
+        if [ ! -d "Tests" ]; then
+          echo "Folder Tests is missing."
+          exit 1  # Fail the workflow
+        fi
+        
+        # Check if file dbt_project.yml exists
+        if [ ! -f "dbt_project.yml" ]; then
+          echo "File dbt_project.yml is missing."
+          exit 1  # Fail the workflow
+        fi
+        
+        # Check if file package.yml exists
+        if [ ! -f "package.yml" ]; then
+          echo "File package.yml is missing."
+          exit 1  # Fail the workflow
+        fi
