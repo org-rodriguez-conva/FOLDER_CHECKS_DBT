@@ -14,51 +14,71 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        # Check if folder macros exists
-        if [ ! -d "macros" ]; then
-          echo "Folder macros is missing."
-          exit 1  # Fail the workflow
-        fi
-        
-        # Check if folder models exists
-        if [ -d "models" ]; then
-          # Check if folders Datamart, Integration, Staging and Raw exist inside folder models
-          if [ -d "models/Datamart" ] && [ -d "models/Integration" ] && [ -d "models/Staging" ] && [ -d "models/Raw" ]; then
-            echo "Folders Datamart, Integration, Staging and Raw are present inside folder models."
-          else
-            echo "One or more of the folders Datamart, Integration, Staging and Raw are missing inside folder models."
-            exit 1  # Fail the workflow
-          fi
-        else
-          echo "Folder models is missing."
-          exit 1  # Fail the workflow
-        fi
-        
-        # Check if folder snapshots exists
-        if [ ! -d "snapshots" ]; then
-          echo "Folder snapshots is missing."
+        # Specify the development branch name (e.g., 'main' or 'develop')
+        development_branch=development
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^macros$'; then
+          echo "Folder name 'macros' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
 
-        # Check if folder Tests exists
-        if [ ! -d "Tests" ]; then
-          echo "Folder Tests is missing."
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models$'; then
+          echo "Folder name 'models' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
-        
-        # Check if file dbt_project.yml exists
-        if [ ! -f "dbt_project.yml" ]; then
-          echo "File dbt_project.yml is missing."
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/Datamart$'; then
+          echo "Folder name 'models/Datamart' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
-        
-        # Check if file package.yml exists
-        if [ ! -f "package.yml" ]; then
-          echo "File package.yml is missing."
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/Integration$'; then
+          echo "Folder name 'models/Integration' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
-        # Check if file package.yml exists
-        if [ ! -f "models/source.yml" ]; then
-          echo "File models/source.yml is missing."
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/Staging$'; then
+          echo "Folder name 'models/Staging' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/Raw$'; then
+          echo "Folder name 'models/Raw' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/source.yml$'; then
+          echo "Folder name 'models/source.yml' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/snapshots$'; then
+          echo "Folder name 'models/snapshots' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/Tests$'; then
+          echo "Folder name 'models/Tests' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/dbt_project.yml$'; then
+          echo "Folder name 'models/dbt_project.yml' has been changed or deleted in the created branch."
+          exit 1  # Fail the workflow
+        fi
+
+        # Check if the folder name has been changed or deleted in the created branch
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q '^models/package.yml$'; then
+          echo "Folder name 'models/package.yml' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
