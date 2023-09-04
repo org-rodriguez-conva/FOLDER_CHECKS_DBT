@@ -14,14 +14,8 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        # Check if folder snapshots exists
-        if [ ! -d "snapshots" ]; then
-          echo "Folder snapshots is missing."
-          exit 1  # Fail the workflow
-        fi
-
-        # Check if folder Tests exists
-        if [ ! -d "Tests" ]; then
-          echo "Folder Tests is missing."
+        # Check if file package.yml exists
+        if [ ! -f "models/source.yml" ]; then
+          echo "File package.yml is missing."
           exit 1  # Fail the workflow
         fi
