@@ -14,8 +14,8 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        # Check if file dbt_project.yml exists
-        if [ ! -f "dbt_project.yml" ]; then
-          echo "File dbt_project.yml is missing."
+        # Check if file package.yml exists
+        if [ ! -f "package.yml" ]; then
+          echo "File package.yml is missing."
           exit 1  # Fail the workflow
         fi
