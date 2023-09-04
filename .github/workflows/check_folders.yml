@@ -18,7 +18,7 @@ jobs:
         development_branch=development
 
         # Check if the folder name has been changed or deleted in the created branch
-        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep -q 'FOLDER_CHECKS_DBT/macros'; then
+        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep  'macros'; then
           echo "Folder name 'macros' has been changed or deleted in the created branch."
           exit 1  # Fail the workflow
         fi
