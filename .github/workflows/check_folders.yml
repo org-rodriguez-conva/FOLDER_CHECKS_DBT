@@ -20,7 +20,7 @@ jobs:
         for file in $files_to_check; do
           echo "Checking $file for renames..."
           echo "Antes"
-          echo "$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} -- "$file" | grep -E '^R[0-9]+||^D')"
+          echo "$(git diff --name-status ${{ github.base_ref }} ${{ github.sha }} -- "$file" | grep -E '^R[0-9]+||^D')"
           renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} -- "$file" | grep -E '^R[0-9]+||^D')
           echo "Depois"
           echo "Checking $renames for RENAMESSSS..."
