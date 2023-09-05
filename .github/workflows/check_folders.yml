@@ -14,14 +14,13 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} | grep -E '^R[0-9]+||^D')
+        files_to_check="dbt_project.yml"
 
-        if [ -n "$renames" ]; then
-              for rename in $renames; do
-                  renamed_file=$(echo "$rename" | awk '{print $2}')
-                  if [ "$renamed_file" == "dbt_project.yml" ]; then
-                      echo "Renaming dbt_project.yml is not allowed in this repository."
-                      exit 1
-                  fi
-              done
+        # Loop through the list of files/directories and check for renames
+        for file in $files_to_check; do
+          renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} -- "$file" | grep -E '^R[0-9]+||^D')
+          if [ -n "$renames" ]; then
+            echo "File renames are not allowed for files within $file in this repository."
+            exit 1
           fi
+        done
