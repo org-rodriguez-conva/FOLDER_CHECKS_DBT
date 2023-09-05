@@ -14,11 +14,9 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        # Specify the development branch name (e.g., 'main' or 'develop')
-        development_branch=development
-
-        # Check if the folder name has been changed or deleted in the created branch
-        if git diff --name-only --diff-filter=RD $development_branch...${{ github.ref }} | grep  'dbt_project.yml'; then
-          echo "Folder name 'dbt_project.yml' has been changed or deleted in the created branch."
-          exit 1  # Fail the workflow
+        CHANGED_FILES=$(git diff --name-status ${{ github.event.before }} ${{ github.event.after }} | awk '$1 == "R" { print $2 }')
+        SPECIFIC_FILE='dbt_project.yml' # Replace with the path to your specific file
+        if [[ "$CHANGED_FILES" == *"$SPECIFIC_FILE"* ]]; then
+          echo "File rename detected for $SPECIFIC_FILE. Exiting without creating a pull request."             
+          exit 1
         fi
