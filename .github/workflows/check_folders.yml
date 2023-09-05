@@ -18,10 +18,8 @@ jobs:
 
         # Loop through the list of files/directories and check for renames
         for file in $files_to_check; do
-          renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} | grep -E '^R[0-9]+')
-          echo "$renames"
           echo "Checking $file for renames..."
-          if git diff --name-status ${{ github.base_ref }}..${{ github.sha }} -- "$file" | grep -qE '^R[0-9]+|^D'; then          
+          if git diff --name-only ${{ github.base_ref }}..${{ github.sha }} -- "$file"; then          
             echo "File renames are not allowed for files within $file in this repository."
             exit 1
           else
