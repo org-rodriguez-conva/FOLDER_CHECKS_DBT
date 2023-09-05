@@ -18,7 +18,7 @@ jobs:
 
         if [ -n "$renames" ]; then
               for rename in $renames; do
-                  renamed_file=$(echo "$rename" | awk '{print $3}')
+                  renamed_file=$(echo "$rename" | awk '{print $2}')
                   if [ "$renamed_file" == "dbt_project.yml" ]; then
                       echo "Renaming dbt_project.yml is not allowed in this repository."
                       exit 1
