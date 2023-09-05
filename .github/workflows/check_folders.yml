@@ -14,7 +14,7 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} | grep -E '^R[0-9]+')
+        renames=$(git diff --name-status ${{ github.base_ref }}..${{ github.sha }} | grep -E '^R[0-9]+||^D')
         
         if [ -n "$renames" ]; then
             echo "File renames are not allowed in this repository."
