@@ -18,7 +18,7 @@ jobs:
           echo "0"
           # Define the expected schema regex pattern
           # expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?_(RAW|STG|INT|DM)$"
-          expected_schema_pattern="^BDP"
+          expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?"
 
           echo "1"
 
