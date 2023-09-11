@@ -18,7 +18,6 @@ jobs:
           echo "0"
           # Define the expected schema regex pattern
           expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?_(RAW|STG|INT|DM)$"
-          # expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?"
 
           echo "1"
 
@@ -34,8 +33,8 @@ jobs:
 
           # Use jq to extract the value of the schema variable
           # actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
-          # actual_schema_value="TEJO_CSAS_INT"
-          actual_schema_value="BDP_CCM_INT"
+          # actual_schema_value="BDP_CCM_INT"
+          actual_schema_value=$(awk '/schema:/ {getline; print}' "$yaml_file")
 
           echo "4"
 
