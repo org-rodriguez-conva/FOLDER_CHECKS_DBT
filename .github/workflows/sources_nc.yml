@@ -30,12 +30,18 @@ jobs:
           # Log the content of the YAML file for debugging
           cat "$yaml_file"
 
+          echo "3"
+
           # Use jq to extract the value of the schema variable
           actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
+
+          echo "4"
 
           # Check if the actual value matches the expected regex pattern
           echo "Actual Schema Value: $actual_schema_value"
           echo "Expected Schema Pattern: $expected_schema_pattern"
+
+          echo "5"
 
           if [[ "$actual_schema_value" =~ $expected_schema_pattern ]]; then
             echo "Schema variable matches the expected regex pattern."
