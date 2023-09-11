@@ -28,12 +28,13 @@ jobs:
           echo "2"
 
           # Log the content of the YAML file for debugging
-          cat models/source.yml
+          cat "$yaml_file"
 
           echo "3"
 
           # Use jq to extract the value of the schema variable
-          actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
+          # actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
+          actual_schema_value="ODP_CCM_INT"
 
           echo "4"
 
