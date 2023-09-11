@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Configure yq
+        uses: sethvargo/setup-yq@v4
+
       - name: Verify SQL File
         run: |
           echo "0"
@@ -34,7 +37,7 @@ jobs:
           # Use jq to extract the value of the schema variable
           # actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
           # actual_schema_value="BDP_CCM_INT"
-          actual_schema_value=$(awk '/schema:/ {getline; print}' "$yaml_file")
+          actual_schema_value=$(yq eval '.sources[0].schema' cat "$yaml_file")
 
           echo "4"
 
