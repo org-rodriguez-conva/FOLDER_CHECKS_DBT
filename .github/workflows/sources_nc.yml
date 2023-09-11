@@ -28,7 +28,7 @@ jobs:
           echo "2"
 
           # Log the content of the YAML file for debugging
-          # cat "$yaml_file"
+          cat models/source.yml
 
           echo "3"
 
