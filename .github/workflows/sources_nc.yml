@@ -14,14 +14,20 @@ jobs:
 
       - name: Verify SQL File
         run: |
+          echo "0"
           # Define the expected schema regex pattern
           # expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?_(RAW|STG|INT|DM).*$"
           expected_schema_pattern=""
-          
+
+          echo "1"
 
           # Specify the path to your YAML file
           yaml_file="models/source.yml"
-          
+
+          echo "2"
+
+          # Log the content of the YAML file for debugging
+          cat "$yaml_file"
 
           # Use jq to extract the value of the schema variable
           actual_schema_value=$(cat "$yaml_file" | jq -r '.sources[].schema')
