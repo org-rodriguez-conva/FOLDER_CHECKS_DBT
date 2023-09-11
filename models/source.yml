@@ -18,7 +18,4 @@ sources:
             description: This column stores the year reference of data.
             tests:
               - not_null
-          - name: PROJECT_NAME
-            description: This column stores the percentage of waged cost based on total year results.
-            tests:
-              - not_null
+
