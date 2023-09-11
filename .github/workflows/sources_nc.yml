@@ -15,7 +15,7 @@ jobs:
       - name: Verify SQL File
         run: |
           # Define the expected schema regex pattern
-          expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?:_(RAW|STG|INT|DM).*$"
+          expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?_(RAW|STG|INT|DM).*$"
 
           # Specify the path to your YAML file
           yaml_file="models/source.yml"
