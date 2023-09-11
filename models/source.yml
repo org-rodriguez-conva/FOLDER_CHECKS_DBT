@@ -1,1 +1,22 @@
-schema.yml
+sources:
+  - name: ODP_CCM_INT
+    database: |
+      {%- if  target.name == "DEV" -%} ODP_CCM_DEV_DB
+      {%- elif target.name == "QA"  -%} BDP_NDC_QA_DB
+      {%- elif target.name == "UAT"  -%} BDP_NDC_UAT_DB
+      {%- elif target.name == "PRD"  -%} BDP_NDC_PRD_DB
+      {%- else -%} database_not_found
+      {%- endif -%}
+    schema: ODP_CCM_INT
+    tables:
+      - name : FCT_CCM_JIRA_CONTROLS
+        description: This Table give us the percentage of waged cost based on total year results.
+        columns:
+          - name: DATE
+            description: This column stores the year reference of data.
+            tests:
+              - not_null
+          - name: PROJECT_NAME
+            description: This column stores the percentage of waged cost based on total year results.
+            tests:
+              - not_null
