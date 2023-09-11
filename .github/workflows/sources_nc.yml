@@ -22,7 +22,7 @@ jobs:
           expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?:_(RAW|STG|INT|DM).*$"
 
           # Specify the path to your YAML file
-          yaml_file="nmodels/sources.yml"
+          yaml_file="models/sources.yml"
 
           # Use yq to extract the value of the schema variable
           actual_schema_value=$(yq e '.sources[].schema' "$yaml_file")
