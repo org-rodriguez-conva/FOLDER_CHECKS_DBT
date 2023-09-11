@@ -1,0 +1,13 @@
+name: Demo sql
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+jobs:
+  verify_sql:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
