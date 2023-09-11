@@ -1,0 +1,37 @@
+ame: Verify SQL File
+
+on:
+  on:
+  pull_request_target:
+    types: [opened, reopened]
+
+jobs:
+  verify_sql:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Verify SQL File
+        run: |
+          # Install yq (YAML processor)
+          wget https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 -O /usr/local/bin/yq
+          chmod +x /usr/local/bin/yq
+
+          # Define the expected schema regex pattern
+          expected_schema_pattern="^(BDP|GDP|ODP)_[A-Za-z]+(_[A-Za-z]+)?:_(RAW|STG|INT|DM).*$"
+
+          # Specify the path to your YAML file
+          yaml_file="nmodels/sources.yml"
+
+          # Use yq to extract the value of the schema variable
+          actual_schema_value=$(yq e '.sources[].schema' "$yaml_file")
+
+          # Check if the actual value matches the expected regex pattern
+          if echo "$actual_schema_value" | grep -qE "$expected_schema_pattern"; then
+            echo "Schema variable matches the expected regex pattern."
+          else
+            echo "Schema variable does not match the expected regex pattern."
+            exit 1
+          fi
