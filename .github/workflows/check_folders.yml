@@ -14,17 +14,16 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        files_to_check="dbt_project.yml"
+        #files_to_check="dbt_project.yml"
 
         # Check if the file was renamed or deleted in the current branch
-        for file in $files_to_check; do
-          if git log --follow -- "$file" | grep -q "rename\|delete"; then
-            echo "File '$file' was renamed or deleted."
-            exit 1
-          else
-            echo "File '$file' was not renamed or deleted."
-          fi
-        done
+        if git log --follow -- "dbt_project.yml" | grep -q "rename\|delete"; then
+          echo "File 'dbt_project.yml' was renamed or deleted."
+          exit 1
+        else
+          echo "File 'dbt_project.yml' was not renamed or deleted."
+        fi
+        
 
 
         
