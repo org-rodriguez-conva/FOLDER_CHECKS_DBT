@@ -2,7 +2,7 @@
 name: Reject Pull Request if File Modified
 on:
   pull_request:
-    branches: [ "${{ github.base_ref }}" ]
+    branches: [ "development" ]
 
 
 jobs:
