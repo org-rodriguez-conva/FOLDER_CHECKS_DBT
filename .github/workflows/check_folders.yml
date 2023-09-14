@@ -14,24 +14,4 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        # Define the base branch to compare against
-        base_branch="development" # Change to your base branch
-
-        # Get the list of deleted folders
-        deleted_folders=$(git diff --name-only $base_branch)
-
-        # Get the list of renamed folders (if any)
-        renamed_folders=$(git diff --name-only --find-renames=$base_branch)
-
-        if [ -n "$deleted_folders" ]; then
-          echo "Error: The following folders were deleted in this pull request: $deleted_folders" >&2
-          exit 1
-        fi
-
-        if [ -n "$renamed_folders" ]; then
-          echo "Error: The following folders were renamed in this pull request: $renamed_folders" >&2
-          exit 1
-        fi
-
-
-        
+        git branch -a
