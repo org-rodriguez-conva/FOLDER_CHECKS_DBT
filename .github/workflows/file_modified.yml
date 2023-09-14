@@ -1,7 +1,11 @@
 name: Reject Pull Request if File Modified
 on:
   pull_request:
-    branches: [ "development" ]
+    branches: 
+      - development
+      - release
+      - uat
+      - main
 
 jobs:
   check_codeowners_modification:
