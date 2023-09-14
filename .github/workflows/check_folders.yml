@@ -14,9 +14,9 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-        git_diff_out=$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }})
+        #git_diff_out=$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }})
+        git diff --name-only development feature/change_name
         echo "123"
-        echo "Qualquer cena:$git_diff_out."
         if [ -n "$git_diff_out" ]; then          
           echo "File renames are not allowed for files within $file in this repository."
           exit 1
