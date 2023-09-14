@@ -2,7 +2,7 @@
 name: Reject Pull Request if File Modified
 on:
   pull_request:
-    branches: [ "development" ]
+    branches: [ "${{ github.base_ref }}" ]
 
 
 jobs:
@@ -12,19 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  # This fetches your repository's code
 
-      - name: Check CODEOWNERS Modification
-        run: |
-          BASE_BRANCH="development"
-          HEAD_BRANCH="${{ github.head_ref }}"
+      - name: Fetch origin
+        run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
-          # Fetch the base branch and set up a tracking branch
-          git fetch origin $BASE_BRANCH:$BASE_BRANCH
-          git branch --set-upstream-to=origin/$BASE_BRANCH $BASE_BRANCH
-          git checkout $HEAD_BRANCH
-
-          # Compare the changes between base and head branches
-          if git diff --name-only $BASE_BRANCH $HEAD_BRANCH | grep "CODEOWNERS"; then
+      - name: Git Diff CODEOWNERS
+        run: 
+          if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep "CODEOWNERS"; then
             echo "CODEOWNERS file has been modified. Rejecting the pull request."
-            exit 1
-          fi
-    
