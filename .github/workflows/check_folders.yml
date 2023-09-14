@@ -12,6 +12,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Fetch
+      run: git fecth origin development:development
+
     - name: Git Diff
-      run:
-        git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }} -- "dbt_proj.yml"
+      run: git diff --name-only development
