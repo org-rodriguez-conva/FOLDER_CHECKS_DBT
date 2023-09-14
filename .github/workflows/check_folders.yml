@@ -15,4 +15,4 @@ jobs:
     - name: Check for required folders and files
       run: |
 
-        git diff --name-only development..bnc
+        git diff -C development
