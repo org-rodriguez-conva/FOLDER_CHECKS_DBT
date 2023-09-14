@@ -18,3 +18,5 @@ jobs:
     - name: Check for required folders and files
       run: |
         git branch -a
+
+        git diff --name-only master..development
