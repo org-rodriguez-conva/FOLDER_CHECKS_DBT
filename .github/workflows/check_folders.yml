@@ -14,5 +14,4 @@ jobs:
 
     - name: Check for required folders and files
       run: |
-
-        git diff -C development
+        git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }}
