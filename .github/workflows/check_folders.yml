@@ -11,11 +11,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with: 
-        fetch-depth: 0
-
-    - name: Fetch
-      run: git fetch origin development:development
 
     - name: Git Diff
-      run: git diff development
+      run:
+        git diff --name-only ${{ github.base_ref }}..${{ github.sha }} -- "dbt_proj.yml"
