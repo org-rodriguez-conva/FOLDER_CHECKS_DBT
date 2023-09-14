@@ -12,11 +12,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Fetch All Remote Branches
-      run: git fetch --all
-
     - name: Check for required folders and files
       run: |
-        git branch -a
 
-        git diff --name-only master..development
+        git diff --name-only origin/development
