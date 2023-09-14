@@ -14,4 +14,6 @@ jobs:
 
     - name: Check for required folders and files
       run: |
+        echo "1"
         git diff --name-only ${{ github.base_ref }}..${{ github.sha }} -- "dbt_project.yml"
+        echo "2"
