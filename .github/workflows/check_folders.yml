@@ -12,9 +12,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Fetch All Remote Branches
-      run: git fetch --all
-
     - name: Check for required folders and files
       run: |
-        git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }}
+        git diff --name-only ${{ github.base_ref }}..${{ github.sha }} -- "dbt_project.yml"
