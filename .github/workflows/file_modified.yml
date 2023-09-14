@@ -1,9 +1,7 @@
-
 name: Reject Pull Request if File Modified
 on:
   pull_request:
     branches: [ "development" ]
-
 
 jobs:
   check_codeowners_modification:
@@ -19,3 +17,4 @@ jobs:
         run: 
           if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep "CODEOWNERS"; then
             echo "CODEOWNERS file has been modified. Rejecting the pull request."
+          fi
