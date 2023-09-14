@@ -1,8 +1,8 @@
 
 name: Reject Pull Request if File Modified
 on:
-  pull_request_target:
-    types: [opened, reopened]
+  pull_request:
+    branches: [ "development" ]
 
 
 jobs:
