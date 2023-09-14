@@ -1,8 +1,7 @@
-
 name: Check Folders and Files
 on:
   pull_request:
-    branches: [ "${{ github.base_ref }}" ]
+    branches: [ "development" ]
     
 jobs:
   check-folders-and-files:
