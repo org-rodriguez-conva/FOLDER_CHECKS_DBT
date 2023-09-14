@@ -14,7 +14,7 @@ jobs:
         run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
       - name: Git Diff CODEOWNERS
-        run: 
+        run: |
           if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep "CODEOWNERS"; then
             echo "CODEOWNERS file has been modified. Rejecting the pull request."
             exit 1
