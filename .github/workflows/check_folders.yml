@@ -16,10 +16,7 @@ jobs:
 
     - name: Git Diff
       run: |
-          file="dbt_project.yml"
-          # Get the previous name of the renamed file
-          #previous_name=$(git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2')
           echo "2"
-          git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2'
+          git status -s | grep -x "** dbt_project.yml"
           echo "3"
         
