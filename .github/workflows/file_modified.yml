@@ -22,7 +22,8 @@ jobs:
 
           # Check if the specific item was renamed or deleted
           if echo "$git_diff_output" | grep -qE "^M\s*$specific_item"; then
-            echo "The specific item '$specific_item' was renamed or deleted."
+            echo "The specific item '$specific_item' was modified, and you don't have authorization to modified it."
+            exit 1
           else
             echo "The specific item '$specific_item' was not renamed or deleted."
           fi
