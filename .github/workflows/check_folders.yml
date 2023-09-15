@@ -17,6 +17,6 @@ jobs:
     - name: Git Diff
       run: |
           echo "2"
-          git diff --name-status development
+          git diff --name-status development | awk '{print $2}'
           echo "3"
         
