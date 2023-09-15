@@ -16,10 +16,12 @@ jobs:
 
     - name: Git Diff
       run: |
-          file="dbt_project.yml"
+          #file="dbt_project.yml"
           # Get the previous name of the renamed file
-          previous_name=$(git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2')
-          
+          #previous_name=$(git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2')
+          echo "2"
+          git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2'
+          echo "3"
           # Check if the file exists in the current branch but not in the previous branch
           if git diff --quiet --exit-code -- "$file" && [ -n "$previous_name" ]; then
             echo "File '$file' was renamed from '$previous_name'."
