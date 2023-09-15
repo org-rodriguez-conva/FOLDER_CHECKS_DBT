@@ -16,7 +16,16 @@ jobs:
 
     - name: Git Diff
       run: |
+          specific_file="dbt_project.yml"
+          echo "1"
+          # Extract the file name from git diff --name-status
+          diff_file=$(git diff --name-status | awk '{print $2}')
           echo "2"
-          git diff --name-status development | awk '{print $2}'
-          echo "3"
+          
+          # Compare the extracted file name to the specific file
+          if [ "$diff_file" = "$specific_file" ]; then
+            echo "The extracted file '$diff_file' matches the specific file '$specific_file'."
+          else
+            echo "The extracted file '$diff_file' does not match the specific file '$specific_file'."
+          fi
         
