@@ -17,6 +17,6 @@ jobs:
     - name: Git Diff
       run: |
           echo "2"
-          git status -s | grep -x "** dbt_project.yml"
+          git diff --name-status development
           echo "3"
         
