@@ -15,4 +15,14 @@ jobs:
       run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
     - name: Git Diff
-      run: git diff --name-only ${{ github.base_ref }}
+      run: |
+          # Get the previous name of the renamed file
+          previous_name=$(git log --follow --name-only --format=format:%n -- "$file" | awk 'NR==2')
+          
+          # Check if the file exists in the current branch but not in the previous branch
+          if git diff --quiet --exit-code -- "$file" && [ -n "$previous_name" ]; then
+            echo "File '$file' was renamed from '$previous_name'."
+            exit 1
+          else
+            echo "File '$file' was not renamed."
+          fi
