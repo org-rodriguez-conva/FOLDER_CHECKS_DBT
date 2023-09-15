@@ -24,7 +24,8 @@ jobs:
           echo "diff file: $diff_file"
           # Compare the extracted file name to the specific file
           if [ "$diff_file" = "$specific_file" ]; then
-            echo "The extracted file '$diff_file' matches the specific file '$specific_file'."
+            echo "You can't rename $diff_file."
+            exit 1
           else
             echo "The extracted file '$diff_file' does not match the specific file '$specific_file'."
           fi
