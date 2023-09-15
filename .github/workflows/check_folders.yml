@@ -16,7 +16,7 @@ jobs:
 
     - name: Git Diff
       run: |
-          specific_items=("dbt_project.yml" "package.yml" )
+          specific_items=("dbt_project.yml" "package.yml" "snapshots" "macros" "Tests" "models/Datamart" "models/Raw" "models/Integration" "models/Staging" "models/source.yml")
           # Extract the file names from git diff --name-status
           git_diff_output=$(git diff --name-status development)
           
