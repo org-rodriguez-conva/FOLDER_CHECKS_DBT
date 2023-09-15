@@ -23,7 +23,7 @@ jobs:
           # Loop through the specific items
           for item in "${specific_items[@]}"; do
             # Check if any extracted file name matches the specific item
-            if echo "$git_diff_output" | grep -qE "\s$item"; then
+            if echo "$git_diff_output" | grep -qE "^[RD][0-9]*\s*$item"; then
               echo "Match found: $item"
               exit 1
             fi
