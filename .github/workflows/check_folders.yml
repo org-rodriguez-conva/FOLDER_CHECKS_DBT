@@ -16,17 +16,16 @@ jobs:
 
     - name: Git Diff
       run: |
-          specific_file="dbt_project.yml"
-          echo "1"
-          # Extract the file name from git diff --name-status
-          diff_file=$(git diff --name-status ${{ github.base_ref }} | awk '{print $2}')
-          echo "2"
-          echo "diff file: $diff_file"
-          # Compare the extracted file name to the specific file
-          if [ "$diff_file" = "$specific_file" ]; then
-            echo "You can't rename $diff_file."
-            exit 1
-          else
-            echo "The extracted file '$diff_file' does not match the specific file '$specific_file'."
-          fi
-        
+          specific_items=("dbt_project.yml" "package.yml" )
+          # Extract the file names from git diff --name-status
+          git_diff_output=$(git diff --name-status development)
+          
+          # Loop through the specific items
+          for item in "${specific_items[@]}"; do
+            # Check if any extracted file name matches the specific item
+            if echo "$git_diff_output" | grep -qE "\s$item"; then
+              echo "Match found: $item"
+              exit 1
+            fi
+          done
+
