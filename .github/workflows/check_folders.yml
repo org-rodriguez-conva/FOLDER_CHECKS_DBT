@@ -15,4 +15,4 @@ jobs:
       run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
     - name: Git Diff
-      run: git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }} | grep -E '^R[0-9]+´|^D'
+      run: git diff --name-only ${{ github.base_ref }}..${{ github.head_ref }}
